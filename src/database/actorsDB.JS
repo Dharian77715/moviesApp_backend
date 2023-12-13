@@ -2,9 +2,9 @@ const executeQuery = require("./connectionDB");
 const actorQueries = require("./queries/actorQueries");
 
 
-const getActorById = async ( actor_id ) => {
+const getActorById = async ( id ) => {
     try {
-        const actors = await executeQuery( actorQueries.select.byId, [actor_id]);
+        const actors = await executeQuery( actorQueries.select.byId, [id]);
         return actors;
         
     } catch (error) {
@@ -30,20 +30,20 @@ const createActor = async ({ name, date_of_birth, sex }) => {
             date_of_birth,
             sex
         ] );
-        return { actor_id: insertId, name, date_of_birth, sex };
+        return { id: insertId, name, date_of_birth, sex };
     } catch (error) {
         console.error(`Error in actorsDB ${ error }`);
         throw error;
     }
 };
 
-const updateActor = async ( actor_id, { name, date_of_birth, sex }  ) => {
+const updateActor = async ( id, { name, date_of_birth, sex }  ) => {
     try {
         const { affectedRows } = await executeQuery( actorQueries.update, [
             name,
             date_of_birth,
             sex,
-            actor_id
+            id
         ]);
         return affectedRows;
     } catch (error) {
@@ -52,9 +52,9 @@ const updateActor = async ( actor_id, { name, date_of_birth, sex }  ) => {
     }
 };
 
-const deleteActor = async ( actor_id ) => {
+const deleteActor = async ( id ) => {
     try {
-        const { affectedRows } = await executeQuery( actorQueries.delete, [actor_id]);
+        const { affectedRows } = await executeQuery( actorQueries.delete, [id]);
         return affectedRows;
     } catch (error) {
         console.error(`Error in actorsDB ${ error }`);

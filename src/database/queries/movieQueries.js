@@ -1,13 +1,13 @@
 const movieQueries = {
     select: {
-      byId: `SELECT movie_id,title,gender,release_date FROM movies WHERE movie_id=?;
+      byId: `SELECT id,title,gender,release_date, img FROM movies WHERE id=?;
           `,
-      all: `SELECT movie_id,title,gender,release_date FROM movies;
+      all: `SELECT id,title,gender,release_date, img FROM movies;
           `,
     },
-    insert: `INSERT INTO movies (title,gender,release_date) VALUES (?, ?, ?);`,
-    update: `UPDATE movies SET title = IFNULL(?, title), gender= IFNULL(?, gender), release_date = IFNULL(?, release_date) WHERE movie_id=?;`,
-    delete: `DELETE FROM movies WHERE movie_id=?`,
+    insert: `INSERT INTO movies (title,gender,release_date, img) VALUES (?, ?, ?, ?);`,
+    update: `UPDATE movies SET title = IFNULL(?, title), gender= IFNULL(?, gender), release_date = IFNULL(?, release_date), img = IFNULL(?, img)  WHERE id=?;`,
+    delete: `DELETE FROM movies WHERE id=?`,
   };
   
   module.exports = movieQueries;

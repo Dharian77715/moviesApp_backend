@@ -2,9 +2,9 @@ const executeQuery = require("./connectionDB");
 const movieQueries = require("./queries/movieQueries");
 
 
-const getMovieById = async ( movie_id ) => {
+const getMovieById = async ( id ) => {
     try {
-        const movies = await executeQuery( movieQueries.select.byId, [movie_id]);
+        const movies = await executeQuery( movieQueries.select.byId, [id]);
         return movies;
         
     } catch (error) {
@@ -52,9 +52,9 @@ const updateMovie = async ( id, { title, gender, release_date}  ) => {
     }
 };
 
-const deleteMovie = async ( movie_id ) => {
+const deleteMovie = async ( id ) => {
     try {
-        const { affectedRows } = await executeQuery( movieQueries.delete, [movie_id]);
+        const { affectedRows } = await executeQuery( movieQueries.delete, [id]);
         return affectedRows;
     } catch (error) {
         console.error(`Error in usersDB ${ error }`);
