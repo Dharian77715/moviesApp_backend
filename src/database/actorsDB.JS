@@ -23,26 +23,24 @@ const getActors = async () => {
     }
 };
 
-const createActor = async ({ name, date_of_birth, sex }) => {
+const createActor = async ({ name, date_of_birth }) => {
     try {
         const { insertId } = await executeQuery( actorQueries.insert, [
             name,
-            date_of_birth,
-            sex
+            date_of_birth
         ] );
-        return { id: insertId, name, date_of_birth, sex };
+        return { id: insertId, name, date_of_birth };
     } catch (error) {
         console.error(`Error in actorsDB ${ error }`);
         throw error;
     }
 };
 
-const updateActor = async ( id, { name, date_of_birth, sex }  ) => {
+const updateActor = async ( id, { name, date_of_birth }  ) => {
     try {
         const { affectedRows } = await executeQuery( actorQueries.update, [
             name,
             date_of_birth,
-            sex,
             id
         ]);
         return affectedRows;

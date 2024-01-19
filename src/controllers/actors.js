@@ -14,7 +14,7 @@ const getResponse = ( message, success = true, data = null ) => {
 const getAllActors = async (req = request, res = response) => {
     try {
         const actors = await getActors()
-        res.status(200).json(getResponse(null, true, actors));    
+        res.status(200).json(actors);    
     } catch (error) {
         console.log('controller', error);
         res.status(400).json(getResponse( error.message, false ))
@@ -26,7 +26,7 @@ const getActorsById = async (req = request, res = response) => {
 
     try {
         const actors = await getActorById(id)
-        res.status(200).json(getResponse(null, true, actors));    
+        res.status(200).json(actors);    
     } catch (error) {
         console.log('controller', error);
         res.status(400).json(getResponse( error.message, false ))

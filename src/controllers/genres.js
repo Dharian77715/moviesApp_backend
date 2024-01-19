@@ -1,67 +1,68 @@
 const { response, request } = require('express');
-const { getMovies, deleteMovie, getMovieById, updateMovie, createMovie } = require('../database/moviesDB.JS');
+const { getGenre, getGenreById, createGenre, deleteGenre, updateGenre } = require('../database/genresDB.JS');
+
 
 const successMessages = {
-    created: 'Movie added correctly',
-    deleted: 'Movie deleted correctly',
-    updated: 'Movie updated correctly'
+    created: 'Genre added correctly',
+    deleted: 'Genre deleted correctly',
+    updated: 'Genre updated correctly'
 }
 
 const getResponse = ( message, success = true, data = null ) => {
     return { message, success, data};
 }
 
-const getAllMovies = async (req = request, res = response) => {
+const getAllGenres = async (req = request, res = response) => {
     try {
-        const movies = await getMovies()
-        res.status(200).json( movies);    
+        const genres = await getGenre()
+        res.status(200).json( genres);    
     } catch (error) {
         console.log('controller', error);
         res.status(400).json(getResponse( error.message, false ))
     }
 }
-const getMoviesById = async (req = request, res = response) => {
+const getGenresById = async (req = request, res = response) => {
    
     const { id } = req?.params;
 
     try {
-        const movies = await getMovieById(id)
-        res.status(200).json(movies);    
+        const genres = await getGenreById(id)
+        res.status(200).json(genres);    
     } catch (error) {
         console.log('controller', error);
         res.status(400).json(getResponse( error.message, false ))
     }
 }
-const postMovies = async (req = request, res = response) => {
+const postGenres = async (req = request, res = response) => {
     
-    const movies = req?.body;
+    const genres = req?.body;
     try {
-        const createdMovie = await createMovie( movies );
-        res.status(200).json( getResponse( successMessages.created, true, createdMovie ));
+        const createdGenre = await createGenre( genres );
+        res.status(200).json( getResponse( successMessages.created, true, createdGenre ));
     } catch (error) {
         console.log('controller', error);
         res.status(400).json(getResponse( error.message, false ))
     }
 }
-const updateMovies = async (req = request, res = response) => {
+const updateGenres = async (req = request, res = response) => {
    
-    const movies = req?.body;
+    const genres = req?.body;
     const { id } = req?.params;
 
     try {
-        await updateMovie( id, movies );
+        await updateGenre( id, genres );
         res.status(200).json( getResponse( successMessages.updated ))
     } catch (error) {
         console.log('controller', error);
         res.status(400).json(getResponse( error.message, false ))
     }
 }
-const deleteMovies =  async (req = request, res = response) => {
+const deleteGenres =  async (req = request, res = response) => {
    
     const { id } = req?.params;
 
     try {
-     await deleteMovie( id );
+     await deleteGenre( id );
       res.status(200).json( getResponse(successMessages.deleted ))
     } catch (error) {
      console.log('controller', error);
@@ -71,9 +72,9 @@ const deleteMovies =  async (req = request, res = response) => {
 
 
 module.exports = {
-    getAllMovies,
-    getMoviesById,
-    postMovies,
-    updateMovies,
-    deleteMovies
+getAllGenres,
+getGenresById,
+postGenres,
+updateGenres,
+deleteGenres
 }

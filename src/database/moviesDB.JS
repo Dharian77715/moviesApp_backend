@@ -23,25 +23,23 @@ const getMovies = async () => {
     }
 };
 
-const createMovie = async ({ title, gender, release_date }) => {
+const createMovie = async ({ title, release_date }) => {
     try {
         const { insertId } = await executeQuery( movieQueries.insert, [
-            title, 
-            gender, 
+            title,  
             release_date
         ] );
-        return { id: insertId, title, gender, release_date};
+        return { id: insertId, title, release_date};
     } catch (error) {
         console.error(`Error in usersDB ${ error }`);
         throw error;
     }
 };
 
-const updateMovie = async ( id, { title, gender, release_date}  ) => {
+const updateMovie = async ( id, { title, release_date}  ) => {
     try {
         const { affectedRows } = await executeQuery( movieQueries.update, [
-            title, 
-            gender, 
+            title,  
             release_date,
             id
         ]);

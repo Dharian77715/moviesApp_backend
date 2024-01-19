@@ -6,6 +6,8 @@ const fileUpload = require('express-fileupload');
 const moviesRouter = require('./routes/movies');
 const actorsRouter = require('./routes/actors');
 const uploadsRouter = require('./routes/uploads');
+const genresRouter = require('./routes/genres');
+const sexRouter = require('./routes/sex');
 
 dotEnv.config();
 
@@ -14,6 +16,8 @@ const port = process.env.PORT || 8080
 const moviesPath  = '/api/movies'
 const actorsPath  = '/api/actors'
 const uploadsPath = '/api/uploads'
+const genresPath = '/api/movie/genres'
+const sexPath = '/api/actor/sex'
 
 // General Exceptions
 process.on('uncaughtException', (err) => {
@@ -35,6 +39,8 @@ app.use(fileUpload({
 app.use(moviesPath, moviesRouter);
 app.use(actorsPath, actorsRouter);
 app.use(uploadsPath, uploadsRouter);
+app.use(genresPath, genresRouter);
+app.use(sexPath, sexRouter);
 
 // Server config
 app.listen(port, () => {
