@@ -12,6 +12,16 @@ const getGenreById = async ( id ) => {
         throw error;
     }
 };
+const getGenreByMovieId = async ( movieId ) => {
+    try {
+        const genre = await executeQuery( genreQueries.select.genresByMovieId, [movieId]);
+        return genre;
+        
+    } catch (error) {
+        console.error(`Error in genreDB ${ error }`);
+        throw error;
+    }
+};
 
 const getGenre = async () => {
     try {
@@ -63,5 +73,6 @@ getGenreById,
 getGenre,
 createGenre,
 updateGenre,
-deleteGenre 
+deleteGenre,
+getGenreByMovieId
 }

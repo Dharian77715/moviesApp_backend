@@ -19,6 +19,7 @@ const uploadsPath = '/api/uploads'
 const genresPath = '/api/movie/genres'
 const sexPath = '/api/actor/sex'
 
+
 // General Exceptions
 process.on('uncaughtException', (err) => {
     console.log(`err: ${err.message}`);

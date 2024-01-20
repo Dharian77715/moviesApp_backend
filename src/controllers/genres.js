@@ -1,4 +1,5 @@
 const { response, request } = require('express');
+const { getGenreByMovieId } = require('../database/genresDB.JS');
 const { getGenre, getGenreById, createGenre, deleteGenre, updateGenre } = require('../database/genresDB.JS');
 
 
@@ -27,6 +28,18 @@ const getGenresById = async (req = request, res = response) => {
 
     try {
         const genres = await getGenreById(id)
+        res.status(200).json(genres);    
+    } catch (error) {
+        console.log('controller', error);
+        res.status(400).json(getResponse( error.message, false ))
+    }
+}
+const getGenresByMoviesId = async (req = request, res = response) => {
+   
+    const { movieId } = req?.params;
+
+    try {
+        const genres = await getGenreByMovieId(movieId)
         res.status(200).json(genres);    
     } catch (error) {
         console.log('controller', error);
@@ -76,5 +89,6 @@ getAllGenres,
 getGenresById,
 postGenres,
 updateGenres,
-deleteGenres
+deleteGenres,
+getGenresByMoviesId
 }
