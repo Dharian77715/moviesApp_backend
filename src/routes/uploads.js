@@ -4,7 +4,7 @@ const { allowedCollections, validateFileUpload, deletePreviousImg } = require('.
 
 const router = Router();
 
-router.post('/:collection/:id', [validateFileUpload, deletePreviousImg], postFile);
+router.post('/:collection/:id', [allowedCollections, validateFileUpload], postFile);
 
 router.put('/:collection/:id', [allowedCollections, validateFileUpload, deletePreviousImg], 
 // updateFileCloudinary)

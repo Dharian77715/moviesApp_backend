@@ -15,7 +15,7 @@ const postFile = async (req = request, res = response) => {
   try {
 
     const imgName = await uploadFile(req.files, undefined, collection);
-    const insertedImg = `UPDATE ${collection} SET img = IFNULL(?, img)  WHERE id=${id};`
+    const insertedImg = `INSERT INTO ${collection} (img) VALUES (?);`
     const results = await executeQuery(insertedImg, [imgName] );
     res.json(results);
 

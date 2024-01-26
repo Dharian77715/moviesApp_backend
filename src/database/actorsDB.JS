@@ -36,7 +36,7 @@ const createActor = async ({ name, date_of_birth }) => {
     }
 };
 
-const updateActor = async ( id, { name, date_of_birth }  ) => {
+const updateActor = async (  {id, name, date_of_birth }  ) => {
     try {
         const { affectedRows } = await executeQuery( actorQueries.update, [
             name,

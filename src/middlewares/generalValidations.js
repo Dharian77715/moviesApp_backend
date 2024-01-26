@@ -75,8 +75,8 @@ const deletePreviousImg = async (req = request, res = response, next) => {
     const { id, collection } = req.params;
 
     try {
-        const imgQuery = `SELECT img FROM ${collection} WHERE id=${id}`;
-    const previousImg = await executeQuery(imgQuery);
+     const imgQuery = `SELECT img FROM ${collection} WHERE id=${id}`;
+     const previousImg = await executeQuery(imgQuery);
 
     //Delete previous img
     if ( previousImg[0].img && previousImg[0].img.length > 0 ) {
@@ -90,6 +90,9 @@ const deletePreviousImg = async (req = request, res = response, next) => {
     }
     next();
 }
+
+
+
 
 module.exports = {
     validateActorsName,

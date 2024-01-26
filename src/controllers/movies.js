@@ -59,6 +59,7 @@ const postMovies = async (req = request, res = response) => {
         res.status(400).json(getResponse( error.message, false ))
     }
 }
+
 const updateMovies = async (req = request, res = response) => {
    
     const movies = req?.body;
@@ -72,6 +73,7 @@ const updateMovies = async (req = request, res = response) => {
         res.status(400).json(getResponse( error.message, false ))
     }
 }
+
 const deleteMovies =  async (req = request, res = response) => {
    
     const { id } = req?.params;

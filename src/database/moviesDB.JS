@@ -8,7 +8,7 @@ const getMovieById = async ( id ) => {
         return movies;
         
     } catch (error) {
-        console.error(`Error in usersDB ${ error }`);
+        console.error(`Error in moviesDB ${ error }`);
         throw error;
     }
 };
@@ -18,7 +18,7 @@ const getMovies = async () => {
         const movies = await executeQuery( movieQueries.select.all );
         return movies;
     } catch (error) {
-        console.error(`Error in usersDB ${ error }`);
+        console.error(`Error in moviesDB ${ error }`);
         throw error;
     }
 };
@@ -31,7 +31,7 @@ const createMovie = async ({ title, release_date }) => {
         ] );
         return { id: insertId, title, release_date};
     } catch (error) {
-        console.error(`Error in usersDB ${ error }`);
+        console.error(`Error in moviesDB ${ error }`);
         throw error;
     }
 };
@@ -45,7 +45,7 @@ const updateMovie = async ( id, { title, release_date}  ) => {
         ]);
         return affectedRows;
     } catch (error) {
-        console.error(`Error in usersDB ${ error }`);
+        console.error(`Error in moviesDB ${ error }`);
         throw error;
     }
 };
@@ -55,7 +55,7 @@ const deleteMovie = async ( id ) => {
         const { affectedRows } = await executeQuery( movieQueries.delete, [id]);
         return affectedRows;
     } catch (error) {
-        console.error(`Error in usersDB ${ error }`);
+        console.error(`Error in moviesDB ${ error }`);
         throw error;
     }
 };
