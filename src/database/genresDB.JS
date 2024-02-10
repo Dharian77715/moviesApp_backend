@@ -1,3 +1,4 @@
+
 const executeQuery = require("./connectionDB");
 const genreQueries = require("./queries/genreQueries");
 
@@ -33,17 +34,19 @@ const getGenre = async () => {
     }
 };
 
-const createGenre = async ({ genre }) => {
+const createGenre = async ({ movies_id, genres_id }) => {
+
     try {
         const { insertId } = await executeQuery( genreQueries.insert, [
-            genre
+            movies_id, genres_id
         ] );
-        return { id:insertId,  genre};
+        return { id:insertId, movies_id, genres_id};
     } catch (error) {
         console.error(`Error in genreDB ${ error }`);
         throw error;
     }
 };
+
 
 const updateGenre = async ( id, { genre}  ) => {
     try {

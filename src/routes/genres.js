@@ -9,7 +9,7 @@ const router = Router();
 router.get('/', getAllGenres);
 router.get('/:id', getGenresById);
 router.get('/moviegenres/:movieId', getGenresByMoviesId);
-router.post('/', postGenres);
+router.post('/moviegenres', postGenres);
 router.put('/:id', updateGenres);
 router.delete('/:id', deleteGenres);
 

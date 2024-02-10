@@ -7,8 +7,6 @@ const movieQueries = {
     },
     insert: `INSERT INTO movies (title,release_date) VALUES (?, ?);`,
     update: `UPDATE movies SET title = IFNULL(?, title), release_date = IFNULL(?, release_date)  WHERE id=?`,
-    // update: `UPDATE movies SET title = ?, release_date = ?, img = ? WHERE id = ? `,
-    // update: `UPDATE movies SET title=?, release_date=?, img=?   WHERE id=?`,
     delete: `DELETE FROM movies WHERE id=?`,
   };
   

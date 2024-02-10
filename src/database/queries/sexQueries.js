@@ -4,7 +4,7 @@ const sexQueries = {
       all: `SELECT id, sex_name FROM sex;`,
     },
     insert: `INSERT INTO sex (sex_name) VALUES (?);`,
-    update: `UPDATE sex SET sex_name = IFNULL(?, sex_name) WHERE id=?;`,
+    update: `UPDATE actors SET sex_id = IFNULL(?, sex_name) WHERE id=?;`,
     delete: `DELETE FROM sex WHERE id=?`,
   };
   

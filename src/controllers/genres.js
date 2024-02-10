@@ -3,6 +3,7 @@ const { getGenreByMovieId } = require('../database/genresDB.JS');
 const { getGenre, getGenreById, createGenre, deleteGenre, updateGenre } = require('../database/genresDB.JS');
 
 
+
 const successMessages = {
     created: 'Genre added correctly',
     deleted: 'Genre deleted correctly',
@@ -46,17 +47,23 @@ const getGenresByMoviesId = async (req = request, res = response) => {
         res.status(400).json(getResponse( error.message, false ))
     }
 }
+
+
+
 const postGenres = async (req = request, res = response) => {
+    const { movies_id, genres_id } = req.body;
     
-    const genres = req?.body;
     try {
-        const createdGenre = await createGenre( genres );
-        res.status(200).json( getResponse( successMessages.created, true, createdGenre ));
+        const deletedGenres = await await deleteGenre( movies_id );
+        const createdGenre = await createGenre({ movies_id, genres_id });
+        res.status(200).json(getResponse(successMessages.created, true,deletedGenres, createdGenre));
     } catch (error) {
         console.log('controller', error);
-        res.status(400).json(getResponse( error.message, false ))
+        res.status(400).json(getResponse(error.message, false));
     }
 }
+
+
 const updateGenres = async (req = request, res = response) => {
    
     const genres = req?.body;
@@ -84,6 +91,9 @@ const deleteGenres =  async (req = request, res = response) => {
 }
 
 
+
+
+
 module.exports = {
 getAllGenres,
 getGenresById,
@@ -92,3 +102,8 @@ updateGenres,
 deleteGenres,
 getGenresByMoviesId
 }
+
+
+
+  
+
