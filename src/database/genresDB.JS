@@ -23,6 +23,16 @@ const getGenreByMovieId = async ( movieId ) => {
         throw error;
     }
 };
+const getMoviesGenres = async ( movies_id, genres_id ) => {
+    try {
+        const genre = await executeQuery( genreQueries.select.moviesGenres, [movies_id, genres_id]);
+        return genre;
+        
+    } catch (error) {
+        console.error(`Error in genreDB ${ error }`);
+        throw error;
+    }
+};
 
 const getGenre = async () => {
     try {
@@ -34,13 +44,13 @@ const getGenre = async () => {
     }
 };
 
-const createGenre = async ({ movies_id, genres_id }) => {
+const createGenre = async ({ movies_id, genres_id, active }) => {
 
     try {
         const { insertId } = await executeQuery( genreQueries.insert, [
-            movies_id, genres_id
+            movies_id, genres_id, active
         ] );
-        return { id:insertId, movies_id, genres_id};
+        return { id:insertId, movies_id, genres_id, active};
     } catch (error) {
         console.error(`Error in genreDB ${ error }`);
         throw error;
@@ -54,6 +64,21 @@ const updateGenre = async ( id, { genre}  ) => {
             genre,  
             id
         ]);
+        return affectedRows;
+    } catch (error) {
+        console.error(`Error in genreDB ${ error }`);
+        throw error;
+    }
+};
+const updateMoviesGenres = async ({ movies_id, genres_id, active}) => {
+
+    try {
+        const { affectedRows } = await executeQuery( genreQueries.updateMoviesGenres, [
+            active,
+            movies_id, 
+            genres_id,  
+        ]);
+
         return affectedRows;
     } catch (error) {
         console.error(`Error in genreDB ${ error }`);
@@ -77,5 +102,7 @@ getGenre,
 createGenre,
 updateGenre,
 deleteGenre,
-getGenreByMovieId
+getGenreByMovieId,
+getMoviesGenres,
+updateMoviesGenres
 }

@@ -1,6 +1,9 @@
 const { response, request } = require('express');
+const { updateMoviesGenres } = require('../database/genresDB.JS');
+const { getMoviesGenres } = require('../database/genresDB.JS');
 const { getGenreByMovieId } = require('../database/genresDB.JS');
 const { getGenre, getGenreById, createGenre, deleteGenre, updateGenre } = require('../database/genresDB.JS');
+
 
 
 
@@ -54,9 +57,13 @@ const postGenres = async (req = request, res = response) => {
     const { movies_id, genres_id } = req.body;
     
     try {
-        const deletedGenres = await await deleteGenre( movies_id );
-        const createdGenre = await createGenre({ movies_id, genres_id });
-        res.status(200).json(getResponse(successMessages.created, true,deletedGenres, createdGenre));
+
+        for (genre of genres_id) {
+
+             await createGenre({ movies_id, genres_id:genre.genres_id, active: 1});   
+
+        }
+        res.status(200).json(getResponse(successMessages.created, true));
     } catch (error) {
         console.log('controller', error);
         res.status(400).json(getResponse(error.message, false));
@@ -66,17 +73,27 @@ const postGenres = async (req = request, res = response) => {
 
 const updateGenres = async (req = request, res = response) => {
    
-    const genres = req?.body;
-    const { id } = req?.params;
+    const { movies_id, genres_id } = req.body;
 
     try {
-        await updateGenre( id, genres );
-        res.status(200).json( getResponse( successMessages.updated ))
+
+        for (genre of genres_id) {
+            let genres = await getMoviesGenres(movies_id, genre.genres_id )
+            if (genres.length>0) {
+                await updateMoviesGenres({ movies_id, genres_id:genre.genres_id, active: genre.active ? 1 : 0})
+            }
+            else{
+                await createGenre({ movies_id, genres_id:genre.genres_id, active: 1});   
+            }
+        }
+        res.status(200).json(getResponse(successMessages.created, true));
     } catch (error) {
         console.log('controller', error);
-        res.status(400).json(getResponse( error.message, false ))
+        res.status(400).json(getResponse(error.message, false));
     }
 }
+
+
 const deleteGenres =  async (req = request, res = response) => {
    
     const { id } = req?.params;

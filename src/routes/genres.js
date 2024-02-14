@@ -10,7 +10,7 @@ router.get('/', getAllGenres);
 router.get('/:id', getGenresById);
 router.get('/moviegenres/:movieId', getGenresByMoviesId);
 router.post('/moviegenres', postGenres);
-router.put('/:id', updateGenres);
+router.put('/moviegenres/:id', updateGenres);
 router.delete('/:id', deleteGenres);
 
 module.exports = router;
