@@ -7,7 +7,6 @@ const genreQueries = {
       moviesGenres: `SELECT  movies_id, genres_id FROM movies_genres  WHERE movies_id=? AND genres_id=?;`
     },
     insert: `INSERT INTO movies_genres (movies_id, genres_id) VALUES (?, ?);`,
-    // updateMoviesGenres: `UPDATE movies_genres SET movies_id = IFNULL(?, movies_id), genres_id = IFNULL(?, genres_id), active = IFNULL(?, active)  WHERE movies_id=? AND genres_id=?;`,
     updateMoviesGenres: `UPDATE movies_genres SET  active = ?  WHERE movies_id=? AND genres_id=?;`,
     delete: `DELETE FROM movies_genres WHERE movies_id = ?`,
   };

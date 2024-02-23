@@ -16,7 +16,7 @@ const getMergedMoviesWithGenres= async (movies )=>{
       
         const moviesWithGenres=[];
         for(movie of movies ){
-          const genres= await getGenreByMovieId(movie.id);
+          const genres = await getGenreByMovieId(movie.id);
           moviesWithGenres.push({...movie, genres});
           
         }
