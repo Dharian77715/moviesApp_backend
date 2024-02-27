@@ -79,7 +79,7 @@ const updateGenres = async (req = request, res = response) => {
 
         for (genre of genres_id) {
             let genres = await getMoviesGenres(movies_id, genre.genres_id )
-            if (genres.length>0) {
+            if (genres.length > 0) {
                 await updateMoviesGenres({ movies_id, genres_id:genre.genres_id, active: genre.active ? 1 : 0})
             }
             else{
